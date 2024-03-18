@@ -42,7 +42,7 @@ setTimeout(function () {
 }
 
 function obtenerUrlAPI(latitud, longitud) {
-    return `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&hourly=rain&forecast_days=1`;
+    return `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&hourly=rain,precipitation_probability&forecast_days=1`;
 }
 
 function position() {
@@ -50,7 +50,7 @@ if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
-    let url = obtenerUrlAPI(latitud, longitud);
+    let url = obtenerUrlAPI(lat, lon);
     fetch(url)
     .then(response => response.json())
     .then(data => console.log(data))
