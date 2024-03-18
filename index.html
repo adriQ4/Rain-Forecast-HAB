@@ -8,14 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Expanded:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/Rain-Forecast-HAB/imgs/rainingSinFondo.png" type="image/png" sizes="32x32"> <!--Borre fondo del icon-->
-    <title>🌦️¿LloverÁpp?</title> <!--Os parece bien el nombre ya que es una "App?""-->
+    <title>🌦️¿LloverÁpp?</title> 
 </head>
 <body>
     <div id="loader">
         <img src="imgs/image_processing20210920-30489-1kwlefs.gif" alt="Cargando...">
     </div>
     <header>
-        <h1>¿Lloverá?</h1>
+        <h1 id="cabecera">¿Lloverá?</h1>
     </header>
     <main>
     <section class="boton">
@@ -23,7 +23,13 @@
     </section>
     <section id="mapa-principal">
     </section>
+    <section>
+        <p id="coordenadas"></p> <!--Añadido-->
+      
+
+    </section>
 </main>
-<script src="app.js"></script>
+<script src="app.js">
+</script>
 </body>
 </html>

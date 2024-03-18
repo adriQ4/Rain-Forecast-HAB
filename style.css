@@ -108,6 +108,16 @@ td,th{
     border-collapse: collapse;
     padding: 2rem;
 }
+
+
+#coordenadas{
+    color: #3d4543;
+    font-weight: 500;
+    font-size: 1rem;
+
+
+
+}
 /* Estilos para móviles */
 @media screen and (max-width:600px) {
     /*! pendiente */

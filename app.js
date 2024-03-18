@@ -2,19 +2,24 @@ window.onload = (event) => {
 loader(1500);
 };
 
+// ! Extracciones del DOM
+const btn = document.getElementById("boton-principal");
+const $cabecera = document.getElementById('cabecera');
+const $coordenadas = document.getElementById('coordenadas');
+
 // Ejecucion de Botón
 
-const btn = document.getElementById("boton-principal");
 btn.addEventListener("click", function () {
-loader(5000);
+loader(3000);
 position();
-redirigir();
+disableHTML();
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
     function (position) {
         let latitud = position.coords.latitude;
         let longitud = position.coords.longitude;
-    },
+        $coordenadas.innerText = `Latitud: ${latitud} Longitud: ${longitud}`//
+    }, //! Añadido 
     function (error) {
         console.log(`Error: ${error.message}`);
     },
@@ -36,22 +41,29 @@ setTimeout(function () {
 }, miliseconds);
 }
 
+function obtenerUrlAPI(latitud, longitud) {
+    return `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&hourly=rain&forecast_days=1`;
+}
+
 function position() {
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
-    let url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=rain&forecast_days=1`;
+    let url = obtenerUrlAPI(latitud, longitud);
     fetch(url)
-        .then((data) => data.json())
-        .then((response) => console.log(response))
-        .catch((error) => console.log(`Error Fetch: ${error.message}`));
-    });
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log('Error:', error));
+});
 } else {
-    console.log("La Geolocalización no es soportada por este navegador.");
+console.log("La Geolocalización no es soportada por este navegador.");
 }
 }
-// ! REDIRIGIR A LA PAGINA DEL RESULTADO
-function redirigir() {
-window.location.href = "index2.html";
+//* Añadido: 
+// DesactivaElementos
+function disableHTML(){
+    $cabecera.style.fontSize = 
+    $cabecera.innerText = "PRONOSTICO DE 24H";
+    btn.style.display = "none"
 }
