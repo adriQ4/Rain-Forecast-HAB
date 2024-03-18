@@ -6,6 +6,10 @@ loader(1500);
 const btn = document.getElementById("boton-principal");
 const $cabecera = document.getElementById('cabecera');
 const $coordenadas = document.getElementById('coordenadas');
+const $tablaBody = document.getElementById('tablaBody');
+
+// * Creaciones del DOM
+const row = document.createElement('tr')
 
 // Ejecucion de Botón
 
@@ -41,8 +45,8 @@ setTimeout(function () {
 }, miliseconds);
 }
 
-function obtenerUrlAPI(latitud, longitud) {
-    return `https://api.open-meteo.com/v1/forecast?latitude=${latitud}&longitude=${longitud}&hourly=rain,precipitation_probability&forecast_days=1`;
+function obtenerUrlAPI(lat, lon) {
+    return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=rain,precipitation_probability&forecast_days=1`;
 }
 
 function position() {
@@ -53,7 +57,14 @@ if (navigator.geolocation) {
     let url = obtenerUrlAPI(lat, lon);
     fetch(url)
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+        // ? data.hourly.forEach(({ precipitation_probability, time }) => {
+         
+        // ?  });
+    // ! const {precipitation_probability, time} = data.hourly;
+    
+    console.log(data.hourly);
+    })
     .catch(error => console.log('Error:', error));
 });
 } else {
