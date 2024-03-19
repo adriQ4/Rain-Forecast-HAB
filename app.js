@@ -23,7 +23,7 @@ btn.addEventListener("click", function () {
       function (position) {
         let latitud = position.coords.latitude;
         let longitud = position.coords.longitude;
-        $coordenadas.innerText = `Latitud: ${latitud} Longitud: ${longitud}`; //
+        $coordenadas.textContent = `Latitud:${latitud} Longitud: ${longitud}`; //
       }, //! Añadido
       function (error) {
         console.log(`Error: ${error.message}`);
@@ -67,7 +67,7 @@ function position() {
             let minutes = horas.getMinutes().toString().padStart(2, "0");
             return `${hours}:${minutes}`;
           });
-          for (let i = 0; i <= 8; i++) {
+          for (let i = 0; i <= 7; i++) {
             rain[i] > 0 ? (rain[i] = "Sí 🌦️") : (rain[i] = "No ☀️");
             $tablaBody.innerHTML += `<tr><td>${hora[i]}</td><td>${rain[i]}</td><td>${precipitation_probability[i]}%</td></tr>`;
           }
@@ -83,7 +83,9 @@ function position() {
 
 // *FUNCION PARA DESACTIVAR ELEMENTOS
 function disableHTML() {
-  $cabecera.style.fontSize ="2rem"
+  $cabecera.style.textAlign = "center";
+  $cabecera.style.fontSize ="2rem";
+  $cabecera.style.maxWidth = "90%"
   $cabecera.style.fontSize = $cabecera.innerText = "PRONÓSTICO PRÓXIMAS 8 HORAS";
   btn.style.display = "none";
   //!modificado 
