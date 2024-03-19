@@ -1,3 +1,5 @@
+'use strict'
+
 window.onload = (event) => {
   loader(1500);
 };
@@ -12,7 +14,6 @@ const $tablaPrincipal = document.getElementById("tabla-principal");
 // * Creaciones del DOM
 
 // Ejecucion de Botón
-
 btn.addEventListener("click", function () {
   loader(3000);
   position();
@@ -48,7 +49,7 @@ function loader(miliseconds) {
 function obtenerUrlAPI(lat, lon) {
   return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=rain,precipitation_probability&forecast_days=1`;
 }
-
+//*FUNCION PARA ENCONTRAR POSICION Y PROXIMAS HORAS DE LLUVIA
 function position() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -59,14 +60,15 @@ function position() {
         .then((response) => response.json())
         .then((data) => {
           const { precipitation_probability, rain, time } = data.hourly;
-          let hora = time.map((hora) => {
-            let horas = new Date(hora);
+          let hora = time.slice(0, 9).map((hora, index) => {
+            let horas = new Date();
+            horas.setHours(horas.getHours() + index);
             let hours = horas.getHours().toString().padStart(2, "0");
             let minutes = horas.getMinutes().toString().padStart(2, "0");
             return `${hours}:${minutes}`;
           });
-          for (let i = 0; i < precipitation_probability.length; i++) {
-            rain[i] > 0 ? (rain[i] = "Si") : (rain[i] = "No");
+          for (let i = 0; i <= 8; i++) {
+            rain[i] > 0 ? (rain[i] = "Sí 🌦️") : (rain[i] = "No ☀️");
             $tablaBody.innerHTML += `<tr><td>${hora[i]}</td><td>${rain[i]}</td><td>${precipitation_probability[i]}%</td></tr>`;
           }
 
@@ -78,40 +80,12 @@ function position() {
     console.log("La Geolocalización no es soportada por este navegador.");
   }
 }
-//* Añadido:
-// DesactivaElementos
+
+// *FUNCION PARA DESACTIVAR ELEMENTOS
 function disableHTML() {
-  $cabecera.style.fontSize = $cabecera.innerText = "PRONOSTICO DE 24H";
+  $cabecera.style.fontSize ="2rem"
+  $cabecera.style.fontSize = $cabecera.innerText = "PRONÓSTICO PRÓXIMAS 8 HORAS";
   btn.style.display = "none";
-  $tablaPrincipal.style.display = "block";
-}
-
-// //! OBTENER HORA
-// function currenthour() {
-//   let fechaActual = new Date();
-
-//   let horas = fechaActual.getHours();
-//   let minutos = fechaActual.getMinutes();
-//   let segundos = fechaActual.getSeconds();
-
-//   let ampm = horas >= 12 ? "PM" : "AM";
-
-//   horas = horas % 12;
-//   horas = horas ? horas : 12; // la hora '0' debería ser '12'
-
-//   minutos = minutos < 10 ? "0" + minutos : minutos;
-
-//   let strHora = horas + ":" + minutos + ":" + segundos + " " + ampm;
-
-//   console.log("Hora actual: " + strHora);
-// }
-// currenthour();
-
-// * HORA ACTUAL
-let fechaActual = new Date();
-let hour = fechaActual.getHours();
-
-function findHour(array) {
-  let result = array.find((e) => e === hour);
-  return console.log(result);
+  //!modificado 
+  $tablaPrincipal.style.display = "inline-block";
 }
