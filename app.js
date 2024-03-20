@@ -102,3 +102,20 @@ function disableHTML() {
   $tablaPrincipal.style.display = "flex";
   $rain.style.display="none"
 }
+
+// *QUITAR GOTAS DE LLUVIA PASADO UNOS SEGUNDOS
+setTimeout(function() {
+  $rain.style.opacity = "0.7";
+}, 3000);
+setTimeout(function() {
+  $rain.style.opacity = "0.5";
+}, 4000);
+setTimeout(function() {
+  $rain.style.opacity = "0.3";
+}, 6000);
+setTimeout(function() {
+  $rain.style.opacity = "0.1";
+}, 7000);
+setTimeout(function() {
+  $rain.style.display = "none";
+}, 8000);
