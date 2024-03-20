@@ -1,17 +1,18 @@
-'use strict'
+"use strict";
 
 window.onload = (event) => {
   loader(1500);
 };
 
 // ! Extracciones del DOM
-const btn = document.getElementById("boton-principal");
+const btn = document.querySelector(".boton");
 const $cabecera = document.getElementById("cabecera");
 const $coordenadas = document.getElementById("coordenadas");
 const $tablaBody = document.getElementById("tablaBody");
 const $tablaPrincipal = document.getElementById("tabla-principal");
 
 // * Creaciones del DOM
+const parrafo = document.createElement("p");
 
 // Ejecucion de Botón
 btn.addEventListener("click", function () {
@@ -84,10 +85,11 @@ function position() {
 // *FUNCION PARA DESACTIVAR ELEMENTOS
 function disableHTML() {
   $cabecera.style.textAlign = "center";
-  $cabecera.style.fontSize ="2rem";
-  $cabecera.style.maxWidth = "90%"
-  $cabecera.style.fontSize = $cabecera.innerText = "PRONÓSTICO PRÓXIMAS 8 HORAS";
+  $cabecera.style.fontSize = "2rem";
+  $cabecera.style.maxWidth = "90%";
+  $cabecera.style.fontSize = $cabecera.innerText =
+    "PRONÓSTICO PRÓXIMAS 8 HORAS";
   btn.style.display = "none";
-  //!modificado 
+  //!modificado
   $tablaPrincipal.style.display = "inline-block";
 }
