@@ -1,28 +1,31 @@
 "use strict";
 
 window.onload = (event) => {
-  loader(1500);
+  loader(500);
 };
 
 // ! Extracciones del DOM
 const btn = document.querySelector(".boton");
 const $cabecera = document.getElementById("cabecera");
+const $title = document.getElementById("title");
 const $coordenadas = document.getElementById("coordenadas");
 const $tablaBody = document.getElementById("tablaBody");
 const $tablaPrincipal = document.getElementById("tabla-principal");
-const $rain =document.querySelector('.rain')
+const $rain = document.querySelector(".rain");
+const $footer = document.querySelector("footer");
 
 // Ejecucion de Botón
 btn.addEventListener("click", function () {
   loader(3000);
   position();
   disableHTML();
+  homeReturn();
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       function (position) {
         let latitud = position.coords.latitude;
         let longitud = position.coords.longitude;
-        console.log(latitud,longitud);
+        console.log(latitud, longitud);
         let coorSection = document.createElement("section"); // CREO LA SECTION PARA COORDENADAS.
         coorSection.className = "padreCoordenadas"; // LE DOY CLASE.
         let parLatitud = document.createElement("p"); // CREO EL PÁRRAFO DE LATITUD;
@@ -79,7 +82,15 @@ function position() {
             return `${hours}:${minutes}`;
           });
           for (let i = 0; i <= 7; i++) {
-            rain[i] > 0 ? (rain[i] = "Sí 🌦️") : (rain[i] = "No ☀️");
+            // rain[i] > 0 ? (rain[i] = "Sí 🌦️") : (rain[i] = "No ☀️");
+            if (rain[i] > 0) {
+              rain[i] = "Sí 🌦️";
+            } else {
+              rain[i] = "No ☀️";
+              $tablaBody.style.backgroundImage = "url('/imgs/soleado.png')";
+              $tablaBody.style.backgroundSize = "cover";
+              $tablaBody.style.opacity = "0.8";
+            }
             $tablaBody.innerHTML += `<tr><td>${hora[i]}</td><td>${rain[i]}</td><td>${precipitation_probability[i]}%</td></tr>`;
           }
 
@@ -94,29 +105,40 @@ function position() {
 
 // *POSTCLICK()
 function disableHTML() {
+  $cabecera.style.fontSize = "2.3rem";
   $cabecera.style.textAlign = "center";
-  $cabecera.style.fontSize = "2rem";
-  $cabecera.style.maxWidth = "90%";
   $cabecera.style.fontSize = $cabecera.innerText =
     "PRONÓSTICO PRÓXIMAS 8 HORAS";
   btn.style.display = "none";
   $tablaPrincipal.style.display = "flex";
-  $rain.style.display="none"
+  $rain.style.display = "none";
 }
 
 // *QUITAR GOTAS DE LLUVIA PASADO UNOS SEGUNDOS
-setTimeout(function() {
+setTimeout(function () {
   $rain.style.opacity = "0.7";
 }, 3000);
-setTimeout(function() {
+setTimeout(function () {
   $rain.style.opacity = "0.5";
 }, 4000);
-setTimeout(function() {
+setTimeout(function () {
   $rain.style.opacity = "0.3";
 }, 6000);
-setTimeout(function() {
+setTimeout(function () {
   $rain.style.opacity = "0.1";
 }, 7000);
-setTimeout(function() {
+setTimeout(function () {
   $rain.style.display = "none";
 }, 8000);
+
+const icon = document.createElement("img");
+function homeReturn() {
+  icon.src = "/imgs/home-automation.png";
+  icon.alt = "home/return...";
+  icon.className = "botonRetorno";
+  $title.parentNode.insertBefore(icon, $title);
+}
+
+icon.addEventListener("click", () => {
+  location.reload();
+});
