@@ -11,9 +11,6 @@ const $coordenadas = document.getElementById("coordenadas");
 const $tablaBody = document.getElementById("tablaBody");
 const $tablaPrincipal = document.getElementById("tabla-principal");
 
-// * Creaciones del DOM
-const parrafo = document.createElement("p");
-
 // Ejecucion de Botón
 btn.addEventListener("click", function () {
   loader(3000);
@@ -24,8 +21,19 @@ btn.addEventListener("click", function () {
       function (position) {
         let latitud = position.coords.latitude;
         let longitud = position.coords.longitude;
-        $coordenadas.textContent = `Latitud:${latitud} Longitud: ${longitud}`; //
-      }, //! Añadido
+        let coorSection = document.createElement("section"); // CREO LA SECTION PARA COORDENADAS.
+        coorSection.className = "padreCoordenadas"; // LE DOY CLASE.
+        let parLatitud = document.createElement("p"); // CREO EL PÁRRAFO DE LATITUD;
+        parLatitud.className = "coordenadas";
+        parLatitud.textContent = `Latitud: ${latitud}`;
+        coorSection.appendChild(parLatitud); // METO EL 'LATITUD' EN SECTION DE COORDENADAS.
+        let parLongitud = document.createElement("p");
+        parLongitud.className = "coordenadas";
+        parLongitud.textContent = `Longitud: ${longitud}`;
+        coorSection.appendChild(parLongitud); // METO EL 'LONGITUD' EN SECTION DE COORDENADAS.
+
+        btn.parentNode.insertBefore(coorSection, btn.nextSibling); // AÑADO AL BODY LA SECTION COORDENADAS.
+      },
       function (error) {
         console.log(`Error: ${error.message}`);
       },
@@ -38,7 +46,7 @@ btn.addEventListener("click", function () {
   }
 });
 
-// *FUNCION PARA LOADER
+// *LOADER()
 function loader(miliseconds) {
   const loader = document.getElementById("loader");
   loader.style.display = "flex";
@@ -82,7 +90,7 @@ function position() {
   }
 }
 
-// *FUNCION PARA DESACTIVAR ELEMENTOS
+// *POSTCLICK()
 function disableHTML() {
   $cabecera.style.textAlign = "center";
   $cabecera.style.fontSize = "2rem";
@@ -90,6 +98,5 @@ function disableHTML() {
   $cabecera.style.fontSize = $cabecera.innerText =
     "PRONÓSTICO PRÓXIMAS 8 HORAS";
   btn.style.display = "none";
-  //!modificado
-  $tablaPrincipal.style.display = "inline-block";
+  $tablaPrincipal.style.display = "flex";
 }
