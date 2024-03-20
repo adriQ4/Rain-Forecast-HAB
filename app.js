@@ -22,6 +22,7 @@ btn.addEventListener("click", function () {
       function (position) {
         let latitud = position.coords.latitude;
         let longitud = position.coords.longitude;
+        console.log(latitud,longitud);
         let coorSection = document.createElement("section"); // CREO LA SECTION PARA COORDENADAS.
         coorSection.className = "padreCoordenadas"; // LE DOY CLASE.
         let parLatitud = document.createElement("p"); // CREO EL PÁRRAFO DE LATITUD;

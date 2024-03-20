@@ -173,15 +173,15 @@ width: 18px;
 min-width: 18px;
 }
 
-    /*! Estilos para tablets */
+    /* Estilos para tablets */
     @media (min-width: 768px) {
         header{
-            margin-top: 2rem; /*!modificado*/
+            margin-top: 2rem; 
         }
         .boton {
             display: flex;
             justify-content: center;
-            margin-top: 30%; /*!modificado*/
+            margin-top: 30%; 
         }
         
         #tabla-principal {
@@ -189,25 +189,25 @@ min-width: 18px;
             justify-content: center;
             align-items: center;
             height: auto;
-            margin: 2rem 2rem 2rem; /*!modificado*/
+            margin: 2rem 2rem 2rem; 
             margin-bottom: 3rem; 
             border: solid 2px #467267;
             border-collapse: collapse;
             min-height: 100%;
-            min-width: 400px; /*!modificado*/
+            min-width: 400px; 
         }
 
     }
-    /*! estilo tablets en landscape */
+    /* estilo tablets en landscape */
     @media screen and (orientation: landscape) and (min-width: 768px){
         header{
-            margin-top: 2rem; /*!modificado*/
+            margin-top: 2rem; 
         }
 
         .boton {
             display: flex;
             justify-content: center;
-            margin-top: 7%; /*!modificado*/
+            margin-top: 7%; 
         }
 
         #tabla-principal {
@@ -223,24 +223,24 @@ min-width: 18px;
         }
     }
     
-    /*! Estilos para escritorio */
+    /* Estilos para escritorio */
     @media (min-width: 1024px) {
-        main{ /*!modificado*/
+        main{ 
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center; 
         }
         header{
-            margin-top: 0.2rem; /*!modificado*/
+            margin-top: 0.2rem; 
         }
 
-        #tabla--principal{  /*!modificado*/
+        #tabla--principal{  
             width: auto;
             min-width: 100%;
             text-align: center;
         }
-        #tabla-principal { /*!modificado*/
+        #tabla-principal { 
             display: none;
             height: auto;
             margin-bottom: 3rem;
