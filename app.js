@@ -10,6 +10,7 @@ const $cabecera = document.getElementById("cabecera");
 const $coordenadas = document.getElementById("coordenadas");
 const $tablaBody = document.getElementById("tablaBody");
 const $tablaPrincipal = document.getElementById("tabla-principal");
+const $rain =document.querySelector('.rain')
 
 // Ejecucion de Botón
 btn.addEventListener("click", function () {
@@ -99,4 +100,5 @@ function disableHTML() {
     "PRONÓSTICO PRÓXIMAS 8 HORAS";
   btn.style.display = "none";
   $tablaPrincipal.style.display = "flex";
+  $rain.style.display="none"
 }
