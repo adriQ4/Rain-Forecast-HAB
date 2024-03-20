@@ -25,7 +25,6 @@ btn.addEventListener("click", function () {
       function (position) {
         let latitud = position.coords.latitude;
         let longitud = position.coords.longitude;
-        console.log(latitud, longitud);
         let coorSection = document.createElement("section"); // CREO LA SECTION PARA COORDENADAS.
         coorSection.className = "padreCoordenadas"; // LE DOY CLASE.
         let parLatitud = document.createElement("p"); // CREO EL PÁRRAFO DE LATITUD;
@@ -87,7 +86,7 @@ function position() {
               rain[i] = "Sí 🌦️";
             } else {
               rain[i] = "No ☀️";
-              $tablaBody.style.backgroundImage = "url('/imgs/soleado.png')";
+              $tablaBody.style.backgroundImage = "url('imgs/soleado.png')";
               $tablaBody.style.backgroundSize = "cover";
               $tablaBody.style.opacity = "0.8";
             }
@@ -133,7 +132,7 @@ setTimeout(function () {
 
 const icon = document.createElement("img");
 function homeReturn() {
-  icon.src = "/imgs/home-automation.png";
+  icon.src = "imgs/home-automation.png";
   icon.alt = "home/return...";
   icon.className = "botonRetorno";
   $title.parentNode.insertBefore(icon, $title);
