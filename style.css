@@ -342,6 +342,12 @@ body {
         font-weight: bold;
     }
 
+    .celdaDatos{
+        font-size: 1.1rem;
+    }
+    .coordenadas{
+        font-size: 1.1rem;
+    }
     .tabla {
         width: 100vw;
         height: 100vh;

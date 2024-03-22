@@ -242,6 +242,7 @@ function homeReturn() {
   icon.src = "imgs/home-automation.png";
   icon.alt = "home/return...";
   icon.className = "botonRetorno";
+  icon.style.margin = "5px auto auto 5px";
   $title.parentNode.insertBefore(icon, $title);
 
   icon.addEventListener("click", () => {
