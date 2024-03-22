@@ -89,34 +89,35 @@ cursor:pointer;
     }
 }
 
-.boton {
+.botones {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
 }
 
-#boton-principal {
-    margin-top: 50%;
-    width: 20rem;
-    height: 20rem;
+#btn8, #btn24 {
+    margin-top: 20%;
+    width: 12rem;
+    height: 12rem;
     background: linear-gradient(to top, #3d4543, #7A918D, #dbdbdb, white);
     color: #3d4543;
     font-weight: 500;
     border: 5px solid #3d4543;
     border-radius: 15rem;
     text-align: center;
-    align-items: center;
     font-size: 1.5rem;
 }
 
-#boton-principal:active {
+#btn8:active, #btn24:active {
     scale: 1.1;
 }
 
-#boton-principal:hover {
+#btn8:hover, #btn24:hover {
     opacity: 0.7;
     cursor:pointer;
 }
+
 
 .padreCoordenadas{
     width: 100%;
@@ -133,22 +134,30 @@ cursor:pointer;
     margin-bottom: 0.5rem;
 }
 
+/*
+ seccion de la tabla:
+ 
+.Tabla = TABLA COMPLETA.
+.tablaHead = el <thead>.
+.filaHead = Fila de la Cabecera.
+.celdaHead = Datos de las celdas de hora, temperatura, precipitaciones...
+.tablaBody = el body de la tabla.
+.filaBody = Filas del body.
+.celdaDatos = Celdas de los datos.
+
+ */
+
 #forTabla {
 }
-/*++++++++++++++++++++HAY QUE MODIFICARLA ENTERA T_T++++++++++++++++++++++++*/
+
 .tabla {
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vh;
+    width: 100%;
+    max-width: 599px;
     text-align: center;
-    min-width: 350px;
-    max-width: 600px;
-    border: solid 2px #467267;
+    /* border: solid 2px #467267;
     border-collapse: collapse;
     margin-bottom: 3rem; */
-}
+} */
 
 .tablaHead, .tablaBody { 
     font-weight: bold;
@@ -203,26 +212,28 @@ min-width: 18px;
         margin-top: 2rem; 
     }
 
-    .boton {
+    .botones {
         display: flex;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-around;
     }
 
-    #boton-principal {
-        margin-top: 35%;
-        width: 20rem;
-        height: 20rem;
+    #btn8, #btn24 {
+        margin-top: 25%;
+        width: 17rem;
+        height: 17rem;
         background: linear-gradient(to top, #3d4543, #7A918D, #dbdbdb, white);
         color: #3d4543;
         font-weight: 500;
         border: 5px solid #3d4543;
         border-radius: 15rem;
         text-align: center;
-        align-items: center;
         font-size: 1.5rem;
     }
 }
-
+.material-symbols-outlined{
+    width: 100%;
+}
 @media screen and (orientation: landscape) and (min-width: 768px){
     .botonRetorno{
         padding-top: 10px;
@@ -237,9 +248,10 @@ min-width: 18px;
         margin-top: 2rem; 
     }
 
-    .boton {
+    .botones {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
+        align-items: center;
         margin-top: 7%; 
     }
 }
@@ -255,9 +267,15 @@ min-width: 18px;
     header{
         margin-top: 0.2rem; 
     }
-
-    #boton-principal {
-        margin-top: 1rem;
+    .botones {
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    #btn8, #btn24 {
+        margin-top: 0.5rem;
         width: 20rem;
         height: 20rem;
         background: linear-gradient(to top, #3d4543, #7A918D, #dbdbdb, white);
@@ -266,7 +284,6 @@ min-width: 18px;
         border: 5px solid #3d4543;
         border-radius: 15rem;
         text-align: center;
-        align-items: center;
         font-size: 1.5rem;
     }
 }
