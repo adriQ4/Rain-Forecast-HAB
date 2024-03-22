@@ -1,7 +1,7 @@
 "use strict";
 
 window.onload = (event) => {
-  loader(1000);
+  loader(100);
 };
 
 // ! Extracciones del DOM
@@ -58,12 +58,12 @@ function obtenerCoordenadas() {
 
           let parLatitud = document.createElement("p");
           parLatitud.className = "coordenadas";
-          parLatitud.textContent = `Latitud: ${latitud}`;
+          parLatitud.textContent = `Latitud: ${latitud.toFixed(5)}`;
           coorSection.appendChild(parLatitud);
 
           let parLongitud = document.createElement("p");
           parLongitud.className = "coordenadas";
-          parLongitud.textContent = `Longitud: ${longitud}`;
+          parLongitud.textContent = `Longitud: ${longitud.toFixed(5)}`;
           coorSection.appendChild(parLongitud);
 
           btn.parentNode.insertBefore(coorSection, btn.nextSibling);
@@ -170,7 +170,7 @@ function position(forLength) {
 
             const celdaLLuvia = document.createElement("td");
             celdaLLuvia.classList = "celdaDatos";
-            celdaLLuvia.textContent = `${rain[i] > 0 ? "Sí 🌦���" : "No ☀️"}`;
+            celdaLLuvia.textContent = `${rain[i] > 0 ? "Sí 🌦" : "No ☀️"}`;
             filaTabla.appendChild(celdaLLuvia);
 
             const celdaPrecipitacion = document.createElement("td");
@@ -190,9 +190,11 @@ function position(forLength) {
             if (rain[i] > 0) {
               tablaBody.style.backgroundImage = "url('imgs/raining.png')";
               tablaBody.style.backgroundSize = "cover";
+              console.log(rain[i]);
             } else {
               tablaBody.style.backgroundImage = "url('imgs/soleado.png')";
               tablaBody.style.backgroundSize = "cover";
+              console.log(rain[i]);
             }
           }
 
