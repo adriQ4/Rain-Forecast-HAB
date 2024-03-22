@@ -1,7 +1,7 @@
 "use strict";
 
 window.onload = (event) => {
-  loader(100);
+  loader(1000);
 };
 
 // ! Extracciones del DOM
@@ -16,7 +16,7 @@ const $footer = document.querySelector("footer");
 
 //!click en el boton 8 horas.
 btn.addEventListener("click", async function () {
-  loader(2000);
+  loader(2500);
   try {
     await obtenerCoordenadas();
     await position(7);
@@ -40,6 +40,7 @@ btn24.addEventListener("click", async function () {
   }
 });
 
+//!coordenadas
 function obtenerCoordenadas() {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
@@ -89,10 +90,12 @@ function loader(miliseconds) {
   }, miliseconds);
 }
 
+//! URL API
 function obtenerUrlAPI(lat, lon) {
   return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=rain,precipitation_probability,temperature_2m&forecast_days=1`;
 }
 
+//!peticion API
 function position(forLength) {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
@@ -214,7 +217,7 @@ function disableHTML() {
   $rain.style.display = "none";
 }
 
-//! QUITAR GOTAS DE LLUVIA PASADO UNOS SEGUNDOS
+//!efecto gotas de lluvia
 setTimeout(function () {
   $rain.style.opacity = "0.7";
 }, 3000);
@@ -231,7 +234,7 @@ setTimeout(function () {
   $rain.style.display = "none";
 }, 8000);
 
-//*creamos img"inicio" y hacemos el reload
+//!creamos img"inicio" y hacemos el reload
 function homeReturn() {
   const icon = document.createElement("img");
   icon.src = "imgs/home-automation.png";
