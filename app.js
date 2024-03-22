@@ -1,7 +1,7 @@
 "use strict";
 
 window.onload = (event) => {
-  loader(100);
+  loader(2000);
 };
 
 // ! Extracciones del DOM
@@ -16,7 +16,7 @@ const $footer = document.querySelector("footer");
 
 //!click en el boton 8 horas.
 btn.addEventListener("click", async function () {
-  loader(2500);
+  loader(2800);
   try {
     await obtenerCoordenadas();
     await position(7);
@@ -31,7 +31,7 @@ btn.addEventListener("click", async function () {
 
 //!click en el boton 24 horas.
 btn24.addEventListener("click", async function () {
-  loader(2500);
+  loader(2800);
   try {
     await obtenerCoordenadas();
     await position(23);
@@ -170,7 +170,8 @@ function position(forLength) {
 
             const celdaLLuvia = document.createElement("td");
             celdaLLuvia.classList = "celdaDatos";
-            celdaLLuvia.textContent = `${rain[i] > 0 ? "Sí 🌦" : "No ☀️"}`;
+            celdaLLuvia.textContent = `${rain[i] > 2 ? "Sí 🌦" : "No ☀️"}`;
+            //* La Agencia Estatal de Meteorología recoge cómo debe describirse la intensidad de precipitación. Con menos de 2 mm/h diremos lluvias débiles. De 2 a 15 mm/h será lluvia.
             filaTabla.appendChild(celdaLLuvia);
 
             const celdaPrecipitacion = document.createElement("td");
@@ -190,11 +191,11 @@ function position(forLength) {
             if (rain[i] > 0) {
               tablaBody.style.backgroundImage = "url('imgs/raining.png')";
               tablaBody.style.backgroundSize = "cover";
-              console.log(rain[i]);
+              tablaBody.style.backgroundRepeat = "no-repeat";
             } else {
               tablaBody.style.backgroundImage = "url('imgs/soleado.png')";
               tablaBody.style.backgroundSize = "cover";
-              console.log(rain[i]);
+              tablaBody.style.backgroundRepeat = "no-repeat";
             }
           }
 
