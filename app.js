@@ -15,56 +15,69 @@ const $rain = document.querySelector(".rain");
 const $footer = document.querySelector("footer");
 
 //!click en el boton 8 horas.
-btn.addEventListener("click", function () {
+btn.addEventListener("click", async function () {
   loader(2000);
-  obtenerCoordenadas();
-  position(7);
-  disableHTML();
-  homeReturn();
+  try {
+    await obtenerCoordenadas();
+    await position(7);
+    disableHTML();
+    homeReturn();
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
 });
 
 //!click en el boton 24 horas.
-btn24.addEventListener("click", function () {
+btn24.addEventListener("click", async function () {
   loader(2000);
-  obtenerCoordenadas();
-  position(23);
-  disableHTML();
-  homeReturn();
+  try {
+    await obtenerCoordenadas();
+    await position(23);
+    disableHTML();
+    homeReturn();
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
 });
 
-// obtenerCoordenadas()
 function obtenerCoordenadas() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        let latitud = position.coords.latitude;
-        let longitud = position.coords.longitude;
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          let latitud = position.coords.latitude;
+          let longitud = position.coords.longitude;
 
-        let coorSection = document.createElement("section");
-        coorSection.className = "padreCoordenadas";
+          let coorSection = document.createElement("section");
+          coorSection.className = "padreCoordenadas";
 
-        let parLatitud = document.createElement("p");
-        parLatitud.className = "coordenadas";
-        parLatitud.textContent = `Latitud: ${latitud}`;
-        coorSection.appendChild(parLatitud);
+          let parLatitud = document.createElement("p");
+          parLatitud.className = "coordenadas";
+          parLatitud.textContent = `Latitud: ${latitud}`;
+          coorSection.appendChild(parLatitud);
 
-        let parLongitud = document.createElement("p");
-        parLongitud.className = "coordenadas";
-        parLongitud.textContent = `Longitud: ${longitud}`;
-        coorSection.appendChild(parLongitud);
+          let parLongitud = document.createElement("p");
+          parLongitud.className = "coordenadas";
+          parLongitud.textContent = `Longitud: ${longitud}`;
+          coorSection.appendChild(parLongitud);
 
-        btn.parentNode.insertBefore(coorSection, btn.nextSibling);
-      },
-      function (error) {
-        console.log(`Error: ${error.message}`);
-      },
-      {
-        maximumAge: 60000,
-      }
-    );
-  } else {
-    console.log("La Geolocalización no es soportada por este navegador.");
-  }
+          btn.parentNode.insertBefore(coorSection, btn.nextSibling);
+          resolve();
+        },
+        function (error) {
+          console.log(`Error: ${error.message}`);
+          reject(error);
+        },
+        {
+          maximumAge: 60000,
+        }
+      );
+    } else {
+      const error = "La Geolocalización no es soportada por este navegador.";
+      console.log(error);
+      reject(error);
+    }
+  });
 }
 
 // !loader()
@@ -80,17 +93,18 @@ function obtenerUrlAPI(lat, lon) {
   return `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=rain,precipitation_probability,temperature_2m&forecast_days=1`;
 }
 
-//! Creamos function() para obtener 'data', cree la tabla y le añada la info.
 function position(forLength) {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      let lat = position.coords.latitude;
-      let lon = position.coords.longitude;
-      let url = obtenerUrlAPI(lat, lon);
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        let url = obtenerUrlAPI(lat, lon);
 
-      fetch(url) //<-- Peticion.
-        .then((response) => response.json())
-        .then((data) => {
+        try {
+          let response = await fetch(url);
+          let data = await response.json();
+
           const { precipitation_probability, rain, time, temperature_2m } =
             data.hourly;
 
@@ -149,7 +163,7 @@ function position(forLength) {
 
             const celdaLLuvia = document.createElement("td"); //<-- crea la celda obtiene y mete los datos.
             celdaLLuvia.classList = "celdaDatos";
-            celdaLLuvia.textContent = `${rain[i] > 0 ? "Sí 🌦️" : "No ☀️"}`;
+            celdaLLuvia.textContent = `${rain[i] > 0 ? "Sí 🌦���" : "No ☀️"}`;
             filaTabla.appendChild(celdaLLuvia);
 
             const celdaPrecipitacion = document.createElement("td"); //<-- crea la celda obtiene y mete los datos.
@@ -174,12 +188,19 @@ function position(forLength) {
               tablaBody.style.backgroundSize = "cover";
             }
           }
-        })
-        .catch((error) => console.log("Error:", error));
-    });
-  } else {
-    console.log("La Geolocalización no es soportada por este navegador.");
-  }
+
+          resolve();
+        } catch (error) {
+          console.log("Error:", error);
+          reject(error);
+        }
+      });
+    } else {
+      const error = "La Geolocalización no es soportada por este navegador.";
+      console.log(error);
+      reject(error);
+    }
+  });
 }
 
 //! postClick()
@@ -211,14 +232,14 @@ setTimeout(function () {
 }, 8000);
 
 //*creamos img"inicio" y hacemos el reload
-const icon = document.createElement("img");
 function homeReturn() {
+  const icon = document.createElement("img");
   icon.src = "imgs/home-automation.png";
   icon.alt = "home/return...";
   icon.className = "botonRetorno";
   $title.parentNode.insertBefore(icon, $title);
-}
 
-icon.addEventListener("click", () => {
-  location.reload();
-});
+  icon.addEventListener("click", () => {
+    location.reload();
+  });
+}
