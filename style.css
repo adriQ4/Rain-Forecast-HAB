@@ -148,16 +148,26 @@ cursor:pointer;
  */
 
 #forTabla {
+    /* width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; */
+    margin: 1rem;
 }
-
+.celdaHead{
+padding: 0.1rem;
+    font-weight: bold;
+}
 .tabla {
     width: 100%;
-    max-width: 599px;
+    height: 100vh;
+    max-width: 100vw;
     text-align: center;
-    /* border: solid 2px #467267;
+    border: solid 2px #467267;
+    
     border-collapse: collapse;
-    margin-bottom: 3rem; */
-} */
+    margin-bottom: 3rem;
+} 
 
 .tablaHead, .tablaBody { 
     font-weight: bold;
@@ -231,9 +241,7 @@ min-width: 18px;
         font-size: 1.5rem;
     }
 }
-.material-symbols-outlined{
-    width: 100%;
-}
+
 @media screen and (orientation: landscape) and (min-width: 768px){
     .botonRetorno{
         padding-top: 10px;
@@ -286,6 +294,20 @@ min-width: 18px;
         text-align: center;
         font-size: 1.5rem;
     }
+    .celdaHead{
+        padding: 0.1rem;
+            font-weight: bold;
+        }
+        .tabla {
+            width: 100vw;
+            height: 100vh;
+            margin: 1rem;
+            max-width: 80vw;
+            text-align: center;
+            border: solid 2px #467267;
+            border-collapse: collapse;
+            margin-bottom: 3rem;
+        } 
 }
 
 .rain {
